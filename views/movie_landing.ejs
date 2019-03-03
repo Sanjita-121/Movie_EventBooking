@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../movie_landing.css">
+</head>
+<body id="colorbg">
+		<div class="col-md-10 blue">
+		
+	</div>
+
+	<div class="col-md-2 blue1">
+		<button type="button" class="btn btn-outline-info">Profile</button>
+	</div>
+
+	<div class="col-md-2">
+		<div class="sidenav">
+  <!-- <a href="#" id="pro"><button class="btn btn-danger btn-lg">Profile</button></a>
+  <a href="#"><button class="btn btn-primary btn-lg">Settings</button></a>
+  <a href="#"><button class="btn btn-warning btn-lg">Show Analysis</button></a> -->
+  
+</div>
+	</div>
+
+<% for(var i=0;i<result.length;i++){
+%><div class="col-xs-18 col-sm-4 col-md-2 thumbnails">
+        <div class="thumbnail">
+          <h5 id="num"><%=i%></h5>
+          <a onclick="openForm()"><img id="image" src="<%=result[i].mv_image%>"/></a>
+          
+          
+           
+        </div>
+
+      </div>
+
+<%} %>
+      
+   
+
+<div class="form-popup" id="myForm">
+  <div class="form-container">
+
+    <h2 id="mvname" align="center"></h2>
+
+    <p id="desc"></p>
+    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+  </div>
+</div>
+
+<script>
+
+function openForm() {
+ // var a=document.getElementById("num").value;
+  document.getElementById("myForm").style.display = "block";
+  document.getElementById("mvname").innerHTML= "<%=result[0].mvname%>"
+  document.getElementById("desc").innerHTML="<%=result[0].mv_desc%>"
+  
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+</script>
+
+</body>
+</html>
