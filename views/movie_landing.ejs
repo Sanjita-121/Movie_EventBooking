@@ -27,11 +27,10 @@
 <% for(var i=0;i<result.length;i++){
 %><div class="col-xs-18 col-sm-4 col-md-2 thumbnails">
         <div class="thumbnail">
-          <h5 id="num"><%=i%></h5>
-          <a onclick="openForm()"><img id="image" src="<%=result[i].mv_image%>"/></a>
+          <input type="number" id="num" value="<%=i%>" placeholder="<%=i%>" disabled>
           
+          <a onclick="openForm('<%=i%>')"><img id="image" src="<%=result[i].mv_image%>" /></a>
           
-           
         </div>
 
       </div>
@@ -43,21 +42,30 @@
 <div class="form-popup" id="myForm">
   <div class="form-container">
 
-    <h2 id="mvname" align="center"></h2>
-
-    <p id="desc"></p>
+    <b><h2 id="mvname" align="center"></h2></b>
+    <h4 id="lang" align="left" ></h4>
+    <h4 id="rating"></h4>
+    <i><p id="desc"></p></i>
+    
     <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+
   </div>
 </div>
 
 <script>
 
-function openForm() {
+function openForm(a) {
  // var a=document.getElementById("num").value;
+  window.alert(a);
+  
+    
   document.getElementById("myForm").style.display = "block";
   document.getElementById("mvname").innerHTML= "<%=result[0].mvname%>"
   document.getElementById("desc").innerHTML="<%=result[0].mv_desc%>"
+  document.getElementById("lang").innerHTML="Language: <%=result[0].mv_lang%>"
+  document.getElementById("rating").innerHTML="Rating: <%=result[0].mv_rating%>"
   
+    
 }
 
 function closeForm() {

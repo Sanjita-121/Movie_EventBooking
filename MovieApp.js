@@ -12,15 +12,7 @@ const express=require('express')
  MongoClient.connect(url,function(err,db){
 
  	var dbo= db.db("mydb");
-// var cursor = dbo.collection('movie').find();
 
-//     cursor.each(function(err, doc) {
-
-//         console.log(doc);
-
-
-
-//  })
 
     app.get('/movie',function(req,res){
 	
@@ -35,17 +27,9 @@ const express=require('express')
     	}
     	else{
     		flag=0;
-    		//res.render('trackex')
-    		//window.alert("Wrong Entry. Try again!");
-    		
-    		//bootbox.alert("Wrong entry")
     		
     	}
-//  MongoClient.connect(url,{
-// 	reconnectTries: Number.MAX_VALUE,
-// 	reconnectInterval: 1000
-// });   	
-    //var a=result[0].mvname;
+
     var a=result
     console.log(flag);
     console.log(result[0].mvname);
@@ -56,12 +40,8 @@ res.render('movie_landing',{result:a});
             
            //db.close();
 
- 
    })
 
-	
-
-	
 
 })
 
