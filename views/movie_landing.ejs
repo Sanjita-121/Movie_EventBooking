@@ -26,9 +26,10 @@
 
 <% for(var i=0;i<result.length;i++){
 %><div class="col-xs-18 col-sm-4 col-md-2 thumbnails">
-        <div class="thumbnail">
+        <div class="thumbnail" style=" background-color:#c1ebf5">
+          <form method="GET" action="/details">
           <input type="number" id="num" value="<%=i%>" placeholder="<%=i%>" disabled>
-          
+        </form>
           <a onclick="openForm('<%=i%>')"><img id="image" src="<%=result[i].mv_image%>" /></a>
           
         </div>
@@ -55,15 +56,23 @@
 <script>
 
 function openForm(a) {
- // var a=document.getElementById("num").value;
-  window.alert(a);
-  
+ 
+  var moviename,des,l,r;
+  <%for(var i=0;i<result.length;i++){%>
+  if(a==<%=i%>){
+	  moviename= "<%= String(result[i].mvname) %>";
+	  des= "<%= String(result[i].mv_desc) %>";
+	  l= "<%= String(result[i].mv_lang) %>";
+	  r= "<%= String(result[i].mv_rating) %>";
+  }
+	<%}%>
+  console.log(moviename);
     
   document.getElementById("myForm").style.display = "block";
-  document.getElementById("mvname").innerHTML= "<%=result[0].mvname%>"
-  document.getElementById("desc").innerHTML="<%=result[0].mv_desc%>"
-  document.getElementById("lang").innerHTML="Language: <%=result[0].mv_lang%>"
-  document.getElementById("rating").innerHTML="Rating: <%=result[0].mv_rating%>"
+  document.getElementById("mvname").innerHTML=String(moviename);
+  document.getElementById("desc").innerHTML=String(des);
+  document.getElementById("lang").innerHTML=String(l);
+  document.getElementById("rating").innerHTML=String(r);
   
     
 }
