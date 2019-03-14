@@ -1,0 +1,142 @@
+<html>
+
+    <head>
+        <title></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../bookmovie.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    </head>
+
+    <body>
+        <style>
+            
+            #bookname{
+                padding-top: 20px;
+                font-style: bold;
+                font-size: 24px;
+                color: black;
+            }
+            
+            .seat {
+            height: 30px;
+            width: 30px;
+            border: 1px solid gray;
+           cursor:pointer;
+           background-color:white;
+        }
+        .walk{
+            padding-left:20px;
+        }
+
+      
+#myTable {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+  font-size: 18px;
+  margin-top: 30px;
+}
+
+#myTable th, #myTable td {
+  text-align: left;
+  padding: 14px;
+ 
+}
+
+#myTable tr {
+  border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header, #myTable tr:hover {
+  background-color:aquamarine;
+}
+        
+</style>
+        <div class="col-md-12 header">
+                <h3 align="center" id="heading">Book your show here!</h3>
+        </div>
+        <div class="col-md-12 details">
+            <div class="col-md-4 images">
+                <img id="mainimage" src="../<%=movies[0].mv_image%>" height="350px"/>
+            </div>
+            <div class="col-md-8 description">
+                <h4 id="bookname"><b><%=movies[0].mvname%></b></h4>
+                <h4 id="bookdesc"><b>Description:</b><br><%=movies[0].mv_desc%></h4>
+                <h3 style="color:white">Rating</h3>
+                <% for(var i=0;i<movies[0].mv_rating;i++){%>
+               <span class="fa fa-star checked"></span>
+
+                <% }%>    
+                <input type="text" placeholder="<%=movies[0].mv_id%>" value="<%=movies[0].mv_id%>" disabled id="mvid">
+            </div>
+        </div>
+        
+        <div class="col-md-3 try" style="background-image: linear-gradient(brown, #e92b2b );; height: 100%;">
+                <h3 style="color:white">Seat diagram</h3>
+
+
+                <div style="border:1px solid gray; width:290px;">
+                    <table>
+                        
+                        <tr>
+                            <td><div class="seat"></div> </td>
+                            <td><div class="seat"></div></td>
+                            <td><div class="seat"></div> </td>
+                            <td><div class="seat"></div> </td>
+                            <td><div class="seat"></div> </td>
+                            <td class="walk">  </td>
+                            <td><div class="seat"></div></td>
+                            <td><div class="seat"></div></td>
+                            <td><div class="seat"></div> </td>
+                            <td><div class="seat"></div> </td>
+                            <td><div class="seat"></div> </td>
+                        </tr>
+                        
+                        
+                    </table>
+                </div>
+        </div>
+         <div class="col-md-9 seats" style="background-color: azure; height: 100%;">
+                     <table id="myTable">
+                        <tr class="header">
+                          <th style="width:60%;">Name</th>
+                          <th style="width:40%;">Location</th>
+                          <th style="width:40%;">Sets</th>
+                        </tr>
+                        <% for(var i=0;i<venue.length;i++){%>
+                        <tr>
+                            <td><%=venue[i].v_name%></td>
+                            <td><%=venue[i].v_location%></td> 
+                            <td><%=venue[i].v_seats%></td>
+                        </tr>
+                        <%}%>
+                      </table>
+        
+        </div>  
+         
+                
+       
+        <script>
+
+                allSeats = document.querySelectorAll('.seat');
+                for (var i = 0; i < allSeats.length; i++) {
+                    var seat = allSeats[i];
+                    seat.addEventListener('click', function () {
+                        var bgclr = this.style.backgroundColor;
+                        if(bgclr =='red')
+                            this.style.backgroundColor = 'white'
+                        else
+                            this.style.backgroundColor = 'red'
+                        debugger
+                    }, false);
+                }
+        
+            </script>
+        
+       
+    </body>
+</html>

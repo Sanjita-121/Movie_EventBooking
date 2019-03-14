@@ -24,63 +24,83 @@
 </div>
 	</div>
 
-<% for(var i=0;i<result.length;i++){
-%><div class="col-xs-18 col-sm-4 col-md-2 thumbnails">
-        <div class="thumbnail" style=" background-color:#c1ebf5">
-          <form method="GET" action="/details">
-          <input type="number" id="num" value="<%=i%>" placeholder="<%=i%>" disabled>
-        </form>
-          <a onclick="openForm('<%=i%>')"><img id="image" src="<%=result[i].mv_image%>" /></a>
+  <% for(var i=0;i<result.length;i++){
+    %><div class="col-xs-18 col-sm-4 col-md-2 thumbnails">
+            <div class="thumbnail">
+              <input type="number" id="num" value="<%=i%>" placeholder="<%=i%>" disabled>
+              
+              <a name="<%=result[i]._id%>" id="<%=i%>" onclick="openForm('<%=i%>')"><img  src="<%=result[i].mv_image%>"  /></a>
+              
+            </div>
+    
+          </div>
+    
+    <%} %>
+    </div>
           
-        </div>
-
+       
+    
+    <div class="form-popup" id="myForm">
+      <div class="form-container">
+        <input type="number" id="formnum"  placeholder="" disabled>
+        <h6 id="mv_id"> </h6>  
+        <b><h2 id="mvname" align="center">Movie</h2></b>
+        <h4 id="lang" align="left" >Language</h4>
+        <h4 id="rating">Rating</h4>
+        <i><p id="desc">Description</p></i>
+        
+        <button type="button" class="btn cancel" onclick="mynum()">Book Tickets</button>
+        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+         
       </div>
-
-<%} %>
+    </div>
+    
+    <script>
+    
+    function openForm(a) {
+     
+      var moviename,des,l,r;
+      <%for(var i=0;i<result.length;i++){%>
+      if(a==<%=i%>){
+        moviename= "<%= String(result[i].mvname) %>";
+        des= "<%= String(result[i].mv_desc) %>";
+        l= "<%= String(result[i].mv_lang) %>";
+        r= "<%= String(result[i].mv_rating) %>";
+        id= "<%= String(result[i].mv_id) %>";
+      }
+      <%}%>
+      console.log(moviename);
+      document.getElementById("formnum").value=a;  
+      document.getElementById("mv_id").innerHTML=String(id);
+      document.getElementById("myForm").style.display = "block";
+      document.getElementById("mvname").innerHTML=String(moviename);
+      document.getElementById("desc").innerHTML=String(des);
+      document.getElementById("lang").innerHTML=String(l);
+      document.getElementById("rating").innerHTML=String(r);
       
-   
-
-<div class="form-popup" id="myForm">
-  <div class="form-container">
-
-    <b><h2 id="mvname" align="center"></h2></b>
-    <h4 id="lang" align="left" ></h4>
-    <h4 id="rating"></h4>
-    <i><p id="desc"></p></i>
+        
+    }
     
-    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+    function closeForm() {
+      document.getElementById("myForm").style.display = "none";
+    }
 
-  </div>
-</div>
-
-<script>
-
-function openForm(a) {
- 
-  var moviename,des,l,r;
-  <%for(var i=0;i<result.length;i++){%>
-  if(a==<%=i%>){
-	  moviename= "<%= String(result[i].mvname) %>";
-	  des= "<%= String(result[i].mv_desc) %>";
-	  l= "<%= String(result[i].mv_lang) %>";
-	  r= "<%= String(result[i].mv_rating) %>";
-  }
-	<%}%>
-  console.log(moviename);
+    function mynum(){
+      var num=document.getElementById("formnum").value;
+      var moviename1
+      <%for(var i=0;i<result.length;i++){%>
+      if(num==<%=i%>){
+        moviename1= "<%= String(result[i].mvname) %>";
+        movieid="<%= String(result[i].mv_id) %>"
+        window.location.href= "/book/<%= String(result[i].mvname)%>";
+      }
+      <%}%>
+     // window.alert(num);
+     // window.location.href= "/book/moviename1";
+      //return num;
+      
+    }
+    </script>
     
-  document.getElementById("myForm").style.display = "block";
-  document.getElementById("mvname").innerHTML=String(moviename);
-  document.getElementById("desc").innerHTML=String(des);
-  document.getElementById("lang").innerHTML=String(l);
-  document.getElementById("rating").innerHTML=String(r);
-  
-    
-}
-
-function closeForm() {
-  document.getElementById("myForm").style.display = "none";
-}
-</script>
-
-</body>
-</html>
+    </body>
+    </html>
