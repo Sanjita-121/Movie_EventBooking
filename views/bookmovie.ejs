@@ -27,10 +27,11 @@
             border: 1px solid gray;
            cursor:pointer;
            background-color:white;
+           display: none;
         }
-        .walk{
+        /* .walk{
             padding-left:20px;
-        }
+        } */
 
       
 #myTable {
@@ -79,33 +80,26 @@
                 <h3 style="color:white">Seat diagram</h3>
 
 
-                <div style="border:1px solid gray; width:290px;">
+                <!-- <div style="border:1px solid gray; width:290px;"> -->
                     <table>
                         
                         <tr>
-                            <td><div class="seat"></div> </td>
-                            <td><div class="seat"></div></td>
-                            <td><div class="seat"></div> </td>
-                            <td><div class="seat"></div> </td>
-                            <td><div class="seat"></div> </td>
-                            <td class="walk">  </td>
-                            <td><div class="seat"></div></td>
-                            <td><div class="seat"></div></td>
-                            <td><div class="seat"></div> </td>
-                            <td><div class="seat"></div> </td>
-                            <td><div class="seat"></div> </td>
+                            
+                            <td><div class="seat" id="seats"></div> </td>
+                            
+                            
                         </tr>
                         
                         
                     </table>
-                </div>
+                <!-- </div> -->
         </div>
          <div class="col-md-9 seats" style="background-color: azure; height: 100%;">
                      <table id="myTable">
                         <tr class="header">
                           <th style="width:60%;">Name</th>
                           <th style="width:40%;">Location</th>
-                          <th style="width:40%;">Sets</th>
+                          <th style="width:40%;">Seats</th>
                         </tr>
                         <% for(var i=0;i<venue.length;i++){%>
                         <tr>
@@ -120,11 +114,37 @@
          
                 
        
-        <script>
+         <script>
 
-                allSeats = document.querySelectorAll('.seat');
-                for (var i = 0; i < allSeats.length; i++) {
-                    var seat = allSeats[i];
+                // allSeats = document.querySelectorAll('.seat');
+                // for (var i = 0; i < allSeats.length; i++) {
+                //     var seat = allSeats[i];
+                //     seat.addEventListener('click', function () {
+                //         var bgclr = this.style.backgroundColor;
+                //         if(bgclr =='red')
+                //             this.style.backgroundColor = 'white'
+                //         else
+                //             this.style.backgroundColor = 'red'
+                //         debugger
+                //     }, false);
+                // }
+        
+           
+        $('#myTable tr').click(function () {
+					
+					tableData = $(this)
+						.children('td')
+						.map(function () {
+							return $(this).text().trim()
+						})
+						.get();
+									
+                    var td = tableData[2].toString();	
+                    window.alert(td)
+					for (var i = 0; i < td; i++) {
+                       // window.alert(i);
+                        document.getElementById('seats').style.display= "block";
+                    var seat = document.getElementById('seats');
                     seat.addEventListener('click', function () {
                         var bgclr = this.style.backgroundColor;
                         if(bgclr =='red')
@@ -133,10 +153,10 @@
                             this.style.backgroundColor = 'red'
                         debugger
                     }, false);
-                }
+                }	
+				});
         
-            </script>
-        
+        </script>
        
     </body>
 </html>

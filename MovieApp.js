@@ -14,7 +14,7 @@ const express=require('express')
  	var dbo= db.db("mydb");
 	app.get('/seat',function(req,res){
 
-		res.render('seat');
+		res.render('seating');
 
 	})
 
