@@ -1,162 +1,212 @@
 <html>
 
-    <head>
-        <title></title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="../bookmovie.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    </head>
+<head>
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="/bookmovie.css">
+    <link rel="stylesheet" type="text/css" href="/seating.css">
+</head>
 
-    <body>
-        <style>
-            
-            #bookname{
-                padding-top: 20px;
-                font-style: bold;
-                font-size: 24px;
-                color: black;
-            }
-            
-            .seat {
-            height: 30px;
-            width: 30px;
-            border: 1px solid gray;
-           cursor:pointer;
-           background-color:white;
-           display: none;
-        }
-        /* .walk{
-            padding-left:20px;
-        } */
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">MovieBooking</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-      
-#myTable {
-  border-collapse: collapse;
-  width: 100%;
-  border: 1px solid #ddd;
-  font-size: 18px;
-  margin-top: 30px;
-}
-
-#myTable th, #myTable td {
-  text-align: left;
-  padding: 14px;
- 
-}
-
-#myTable tr {
-  border-bottom: 1px solid #ddd;
-}
-
-#myTable tr.header, #myTable tr:hover {
-  background-color:aquamarine;
-}
-        
-</style>
-        <div class="col-md-12 header">
-                <h3 align="center" id="heading">Book your show here!</h3>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
         </div>
-        <div class="col-md-12 details">
-            <div class="col-md-4 images">
-                <img id="mainimage" src="../<%=movies[0].mv_image%>" height="350px"/>
+    </nav>
+    <section class="movie_details">
+        <div class="row">
+            <div class="col images">
+                    <img class="img-fluid" id="mainimage" src="../<%=movies[0].mv_image%>" />
             </div>
-            <div class="col-md-8 description">
-                <h4 id="bookname"><b><%=movies[0].mvname%></b></h4>
-                <h4 id="bookdesc"><b>Description:</b><br><%=movies[0].mv_desc%></h4>
-                <h3 style="color:white">Rating</h3>
-                <% for(var i=0;i<movies[0].mv_rating;i++){%>
-               <span class="fa fa-star checked"></span>
-
-                <% }%>    
-                <input type="text" placeholder="<%=movies[0].mv_id%>" value="<%=movies[0].mv_id%>" disabled id="mvid">
-            </div>
-        </div>
+            <div class="col description">
+                    <h4 id="bookname"><b><%=movies[0].mvname%></b></h4>
+                    <h4 id="bookdesc"><b>Description:</b><br><%=movies[0].mv_desc%></h4>
+                    <h3 style="color:white">Rating</h3>
+                    <% for(var i=0;i<movies[0].mv_rating;i++){%>
+                    <span class="fa fa-star checked"></span>
         
-        <div class="col-md-3 try" style="background-image: linear-gradient(brown, #e92b2b );; height: 100%;">
-                <h3 style="color:white">Seat diagram</h3>
-
-
-                <!-- <div style="border:1px solid gray; width:290px;"> -->
-                    <table>
-                        
-                        <tr>
-                            
-                            <td><div class="seat" id="seats"></div> </td>
-                            
-                            
-                        </tr>
-                        
-                        
-                    </table>
-                <!-- </div> -->
+                    <% }%>
+                    <input type="text" placeholder="<%=movies[0].mv_id%>" value="<%=movies[0].mv_id%>" disabled id="mvid">
+                </div>
         </div>
-         <div class="col-md-9 seats" style="background-color: azure; height: 100%;">
-                     <table id="myTable">
-                        <tr class="header">
-                          <th style="width:60%;">Name</th>
-                          <th style="width:40%;">Location</th>
-                          <th style="width:40%;">Seats</th>
-                        </tr>
-                        <% for(var i=0;i<venue.length;i++){%>
-                        <tr>
-                            <td><%=venue[i].v_name%></td>
-                            <td><%=venue[i].v_location%></td> 
-                            <td><%=venue[i].v_seats%></td>
-                        </tr>
-                        <%}%>
-                      </table>
-        
-        </div>  
-         
                 
-       
-         <script>
+    </section>
+    <section>
+            <div class="row">
+                    <div class="col text-center" style="background-image: linear-gradient(brown, #e92b2b );">
+                        <h3 style="color:white">Seat diagram</h3>
+        
+                        <div id="holder">
+                            <ul id="place">
+                            </ul>
+                        </div>
+                        <div>
+                            <ul id="seatDescription">
+                                <li style="background:url('/img/available_seat_img.GIF') no-repeat scroll 0 0 transparent;">
+                                    Available
+                                    Seat</li>
+                                <li style="background:url('/img/booked_seat_img.GIF') no-repeat scroll 0 0 transparent;">Booked
+                                    Seat
+                                </li>
+                                <li style="background:url('/img/selected_seat_img.GIF') no-repeat scroll 0 0 transparent;">
+                                    Selected Seat
+                                </li>
+                            </ul>
+                        </div>
+                        <div style="clear:both;width:100%">
+                            <input type="button" id="btnShowNew" value="Show Selected Seats" />
+                            <input type="button" id="btnShow" value="Show All" />
+                        </div>
+                    </div>
+            </div>
+    </section>
+    <section>
+        <div class="row">
+                <div class="col" style="background-color: azure;">
+                        <table class="table" id="myTable">
+                            <thead>
+                                <tr>
+                                <th style="width:60%;">Name</th>
+                                <th style="width:40%;">Location</th>
+                                <th style="width:40%;">Seats</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <% for(var i=0;i<venue.length;i++){%>
+                            <tr>
+                                <td><%=venue[i].v_name%></td>
+                                <td><%=venue[i].v_location%></td>
+                                <td><%=venue[i].v_seats%></td>
+                                <td hidden><%=venue[i].cols%></td>
+                                <td hidden><%=venue[i].row%></td>
+                            </tr>
+                            <%}%>
+                            </tbody>
+                        </table>
+                        
+                        </div>  
+        </div>
+    </section>
 
-                // allSeats = document.querySelectorAll('.seat');
-                // for (var i = 0; i < allSeats.length; i++) {
-                //     var seat = allSeats[i];
-                //     seat.addEventListener('click', function () {
-                //         var bgclr = this.style.backgroundColor;
-                //         if(bgclr =='red')
-                //             this.style.backgroundColor = 'white'
-                //         else
-                //             this.style.backgroundColor = 'red'
-                //         debugger
-                //     }, false);
-                // }
-        
-           
-        $('#myTable tr').click(function () {
-					
-					tableData = $(this)
-						.children('td')
-						.map(function () {
-							return $(this).text().trim()
-						})
-						.get();
-									
-                    var td = tableData[2].toString();	
-                    window.alert(td)
-					for (var i = 0; i < td; i++) {
-                       // window.alert(i);
-                        document.getElementById('seats').style.display= "block";
-                    var seat = document.getElementById('seats');
-                    seat.addEventListener('click', function () {
-                        var bgclr = this.style.backgroundColor;
-                        if(bgclr =='red')
-                            this.style.backgroundColor = 'white'
-                        else
-                            this.style.backgroundColor = 'red'
-                        debugger
-                    }, false);
-                }	
-				});
-        
-        </script>
-       
+
+         <script>
+                $('#myTable tr').click(function () {
+    
+                    tableData = $(this)
+                        .children('td')
+                        .map(function () {
+                            return $(this).text().trim()
+                        })
+                        .get();
+                    var settings = {
+                rows: parseInt(tableData[4].toString()),
+                cols: parseInt(tableData[3].toString()),
+                rowCssPrefix: 'row-',
+                colCssPrefix: 'col-',
+                seatWidth: 35,
+                seatHeight: 35,
+                seatCss: 'seat',
+                selectedSeatCss: 'selectedSeat',
+                selectingSeatCss: 'selectingSeat'
+            };
+    
+            var init = function (reservedSeat) {
+                var str = [], seatNo, className;
+                for (i = 0; i < settings.rows; i++) {
+                    for (j = 0; j < settings.cols; j++) {
+                        seatNo = (i + j * settings.rows + 1);
+                        className = settings.seatCss + ' ' + settings.rowCssPrefix + i.toString() + ' ' + settings.colCssPrefix + j.toString();
+                        if ($.isArray(reservedSeat) && $.inArray(seatNo, reservedSeat) != -1) {
+                            className += ' ' + settings.selectedSeatCss;
+                        }
+                        str.push('<li class="' + className + '"' +
+                            'style="top:' + (i * settings.seatHeight).toString() + 'px;left:' + (j * settings.seatWidth).toString() + 'px">' +
+                            '<a title="' + seatNo + '">' + seatNo + '</a>' +
+                            '</li>');
+                    }
+                }
+                $('#place').html(str.join(''));
+            };
+            //case I: Show from starting
+            //init();
+
+            //Case II: If already booked
+            var bookedSeats = [5, 10, 25];
+            init(bookedSeats);
+
+
+            $('.' + settings.seatCss).click(function () {
+                if ($(this).hasClass(settings.selectedSeatCss)) {
+                    alert('This seat is already reserved');
+                }
+                else {
+                    $(this).toggleClass(settings.selectingSeatCss);
+                }
+            });
+
+            $('#btnShow').click(function () {
+                var str = [];
+                $.each($('#place li.' + settings.selectedSeatCss + ' a, #place li.' + settings.selectingSeatCss + ' a'), function (index, value) {
+                    str.push($(this).attr('title'));
+                });
+                alert(str.join(','));
+            })
+
+            $('#btnShowNew').click(function () {
+                var str = [], item;
+                $.each($('#place li.' + settings.selectingSeatCss + ' a'), function (index, value) {
+                    item = $(this).attr('title');
+                    str.push(item);
+                });
+                alert(str.join(','));
+            })
+                    
+                });
+        </script>  
     </body>
 </html>
