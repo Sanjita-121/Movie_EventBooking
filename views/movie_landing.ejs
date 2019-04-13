@@ -6,14 +6,19 @@
 	<link rel="stylesheet" type="text/css" href="/css/movie_landing.css">
 </head>
 <body id="colorbg">
+	<div class="row">
+
 		<div class="col-md-10 blue">
-		
+				<button type="button" class="btn btn-danger" onclick="opensign()">Sign in</button>
+				<a href="/signup"><button type="button" class="btn btn-primary">Sign up</button></a>
 	</div>
 
 	<div class="col-md-2 blue1">
-		<button type="button" class="btn btn-outline-info">Profile</button>
+		<button type="button" class="btn btn-info">Profile</button>
+		
 	</div>
-
+	</div>
+	<div class="row">
 	<div class="col-md-2">
 		<div class="sidenav">
 	<!-- <a href="#" id="pro"><button class="btn btn-danger btn-lg">Profile</button></a>
@@ -23,18 +28,20 @@
 </div>
 	</div>
 
+	
 	<% for(var i=0;i<result.length;i++){
 		%><div class="col-xs-18 col-sm-4 col-md-2 thumbnails">
 						<div class="thumbnail">
 							<input type="number" id="num" value="<%=i%>" placeholder="<%=i%>" disabled>
 							
-							<a name="<%=result[i]._id%>" id="<%=i%>" onclick="openForm('<%=i%>')"><img  src="<%=result[i].mv_image%>"  /></a>
+							<a name="<%=result[i]._id%>" id="<%=i%>" onclick="openForm('<%=i%>')"><img  src="<%=result[i].mv_image%> " height="90%" width="90%" /></a>
 							
 						</div>
 		
 					</div>
 		
 		<%} %>
+	
 		</div>
 					
 			 
@@ -53,6 +60,22 @@
 				 
 			</div>
 		</div>
+
+		<div class="form-popup1" id="myForm1">
+				<div class="form-container1">
+					  	<form action="/signin" method="post">
+						<h5>Username</h5>
+						<input type="text" placeholder="username" name="user"><br>
+						<h5>Password</h5>
+						<input type="password" placeholder="password" name="pass"><br>
+						<h5>Sign in as:</h5>
+						<input type="radio" value="User" placeholder="User" name="customer" ><b>User</b>
+            <input type="radio" value="Event Manager" name="customer" id="radioevent"><b>Event Manager</b><br><br>
+					<input type="submit" class="btn cancel" value="Sign In">
+				</form>
+					 
+				</div>
+			</div>
 		
 		<script>
 		
@@ -79,6 +102,16 @@
 			
 				
 		}
+
+		function opensign() {
+		 
+		 
+		 
+		 document.getElementById("myForm1").style.display = "block";
+		 
+		 
+			 
+	 }
 		
 		function closeForm() {
 			document.getElementById("myForm").style.display = "none";
@@ -91,7 +124,7 @@
 			if(num==<%=i%>){
 				moviename1= "<%= String(result[i].mvname) %>";
 				movieid="<%= String(result[i].mv_id) %>"
-				window.location.href= "/book/<%= String(result[i].mvname)%>";
+				window.location.href= "/book/<%= String(result[i].mvname)%>/<%=userID%>";
 			}
 			<%}%>
 		 // window.alert(num);

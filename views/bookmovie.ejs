@@ -116,7 +116,7 @@
 						src="../<%=movies[0].mv_image%>"
 					/>
 				</div>
-				<div class="col description">
+				<div class="col description" style="padding-top:5%">
 					<h4 id="bookname"><b><%=movies[0].mvname%></b></h4>
 					<h4 id="bookdesc">
 						<b>Description:</b><br /><%=movies[0].mv_desc%>
@@ -136,47 +136,26 @@
 		<section>
 			<div class="row">
 				<div
-					class="col text-center"
-					style="background-image: linear-gradient(brown, #e92b2b );"
+					class="split left"
+					style="background-image: linear-gradient(brown, #e92b2b ); "
 				>
-					<h3 style="color:white">Seat diagram</h3>
+					<h3 style="color:white;">Seat diagram</h3>
 
 					<div id="holder">
 						<ul id="place"></ul>
 					</div>
-					<div>
-						<ul id="seatDescription">
-							<li
-								style="background:url('/img/available_seat_img.GIF') no-repeat scroll 0 0 transparent;"
-							>
-								Available Seat
-							</li>
-							<li
-								style="background:url('/img/booked_seat_img.GIF') no-repeat scroll 0 0 transparent;"
-							>
-								Booked Seat
-							</li>
-							<li
-								style="background:url('/img/selected_seat_img.GIF') no-repeat scroll 0 0 transparent;"
-							>
-								Selected Seat
-							</li>
-						</ul>
-					</div>
-					<div style="clear:both;width:100%">
-						<input
-							type="button"
-							id="btnShowNew"
-							value="Show Selected Seats"
-						/>
-						<input type="button" id="btnShow" value="Show All" />
+					<div class="col">
+						<button
+							type="submit"
+							id="bookbutton"
+							class="btn btn-primary"
+						>
+							Book now
+						</button>
 					</div>
 				</div>
-			</div>
-		</section>
-		<section>
-			<div class="row">
-				<div class="col" style="background-color: azure;">
+
+				<div class="split right" style="background-color: azure;">
 					<table class="table" id="myTable">
 						<thead>
 							<tr>
@@ -192,27 +171,30 @@
 				</div>
 			</div>
 		</section>
+		<section></section>
 
 		<script>
-			$('#myTable tr').click(function() {
+			$("#myTable tr").click(function() {
 				tableData = $(this)
-					.children('td')
+					.children("td")
 					.map(function() {
 						return $(this)
 							.text()
 							.trim();
+							var td = tableData[1].toString();
+							window.alert(td);
 					})
 					.get();
 				var settings = {
 					rows: parseInt(tableData[4].toString()),
 					cols: parseInt(tableData[3].toString()),
-					rowCssPrefix: 'row-',
-					colCssPrefix: 'col-',
+					rowCssPrefix: "row-",
+					colCssPrefix: "col-",
 					seatWidth: 35,
 					seatHeight: 35,
-					seatCss: 'seat',
-					selectedSeatCss: 'selectedSeat',
-					selectingSeatCss: 'selectingSeat'
+					seatCss: "seat",
+					selectedSeatCss: "selectedSeat",
+					selectingSeatCss: "selectingSeat"
 				};
 
 				var init = function(reservedSeat) {
@@ -224,17 +206,17 @@
 							seatNo = i + j * settings.rows + 1;
 							className =
 								settings.seatCss +
-								' ' +
+								" " +
 								settings.rowCssPrefix +
 								i.toString() +
-								' ' +
+								" " +
 								settings.colCssPrefix +
 								j.toString();
 							if (
 								$.isArray(reservedSeat) &&
 								$.inArray(seatNo, reservedSeat) != -1
 							) {
-								className += ' ' + settings.selectedSeatCss;
+								className += " " + settings.selectedSeatCss;
 							}
 							str.push(
 								'<li class="' +
@@ -242,19 +224,19 @@
 									'"' +
 									'style="top:' +
 									(i * settings.seatHeight).toString() +
-									'px;left:' +
+									"px;left:" +
 									(j * settings.seatWidth).toString() +
 									'px">' +
 									'<a title="' +
 									seatNo +
 									'">' +
 									seatNo +
-									'</a>' +
-									'</li>'
+									"</a>" +
+									"</li>"
 							);
 						}
 					}
-					$('#place').html(str.join(''));
+					$("#place").html(str.join(""));
 				};
 				//case I: Show from starting
 				//init();
@@ -263,42 +245,45 @@
 				var bookedSeats = [5, 10, 25];
 				init(bookedSeats);
 
-				$('.' + settings.seatCss).click(function() {
+				$("." + settings.seatCss).click(function() {
 					if ($(this).hasClass(settings.selectedSeatCss)) {
-						alert('This seat is already reserved');
+						alert("This seat is already reserved");
 					} else {
 						$(this).toggleClass(settings.selectingSeatCss);
 					}
 				});
 
-				$('#btnShow').click(function() {
+				$("#btnShow").click(function() {
 					var str = [];
 					$.each(
 						$(
-							'#place li.' +
+							"#place li." +
 								settings.selectedSeatCss +
-								' a, #place li.' +
+								" a, #place li." +
 								settings.selectingSeatCss +
-								' a'
+								" a"
 						),
 						function(index, value) {
-							str.push($(this).attr('title'));
+							str.push($(this).attr("title"));
 						}
 					);
-					alert(str.join(','));
+
+					alert(str.join(","));
 				});
 
-				$('#btnShowNew').click(function() {
+				$("#bookbutton").click(function() {
 					var str = [],
 						item;
 					$.each(
-						$('#place li.' + settings.selectingSeatCss + ' a'),
+						$("#place li." + settings.selectingSeatCss + " a"),
 						function(index, value) {
-							item = $(this).attr('title');
+							item = $(this).attr("title");
 							str.push(item);
 						}
 					);
-					alert(str.join(','));
+
+					localStorage.setItem("storagename", str);
+					window.location.href = "/confirm/<%=userID%>";
 				});
 			});
 		</script>
