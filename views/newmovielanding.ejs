@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../movie_landing.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body onload="selectcity()">
+     
+<div class="row">
+  <div class="column left">
+   <img src="data:image/png;base64,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" class=image>
+  </div>
+  <div class="column middle">
+    <h3 align="center" id="heading">Amazon Book Your Show</h3>
+    <form id="search_box"action="/search" method="GET">
+      <input type="text" class="form-control" name="search" placeholder="Search for Movies,Events">
+      <!-- <button id="search_btn" type="submit" name="" onclick="myFunction()" >Search</button> -->
+     </form>
+  </div>
+  <div class="column right">
+   <div class="btn-group">
+  <form action="" method="get">
+  <button type="submit" formaction="/profile">profile</button>
+  <button type="button">Sign In/Up</button>
+</form>
+ 
+  </div>
+  </div>
+</div>
+
+<div class="leftside">
+</div>
+
+</div>
+<% var count1 = 0 %>
+<% for(var i=0;i<mov.length;i++) { %>
+  <% var mv_type = String(mov[i].mv_type) %>
+  <% if(mv_type == "movies") { %>
+    <% count1++ %>
+  <%}%>
+<% } %>
+<% if(count1 != 0) { %>
+  <div class="movie">
+  <h2>Movies</h2>
+  <% for(var i=0;i<mov.length;i++) { %>
+    <% var mv_type = String(mov[i].mv_type) %>
+    <% if(mv_type == "movies"){ %>
+      <div id="movies" class="col-xs-18 col-sm-4 col-md-2 thumbnails">
+        <div class="thumbnail">
+          <input type="number" id="num" value="<%=i%>" placeholder="<%=i%>" disabled>
+          <a name="<%=mov[i]._id%>" id="<%=i%>" onclick="openForm1('<%=i%>')"><img  src="<%=mov[i].mv_image%>"  /></a>
+          <br></br><button type="button" id="btninfo" class="btn1-info" onclick="mynum1('<%=i%>')">Info</button>  
+        </div>
+      </div>
+    <%}%> 
+  <%}%>
+  </div>
+<%}%>
+
+<% var count2 = 0 %>
+<% for(var i=0;i<mov.length;i++) { %>
+  <% var mv_type = String(mov[i].mv_type) %>
+  <% if(mv_type == "events") { %>
+    <% count2++ %>
+  <%}%>
+<% } %>
+<% if(count1!=0){ %>
+<% if(count2 != 0) { %>
+  <div class="event">
+  <h2>Events</h2>
+  <% for(var i=0;i<mov.length;i++) { %>
+    <% var mv_type = String(mov[i].mv_type) %>
+    <% if(mv_type == "events"){ %>
+      <div id="movies" class="col-xs-18 col-sm-4 col-md-2 thumbnails">
+        <div class="thumbnail">
+          <input type="number" id="num" value="<%=i%>" placeholder="<%=i%>" disabled>
+          <a name="<%=mov[i]._id%>" id="<%=i%>" onclick="openForm1('<%=i%>')"><img  src="<%=mov[i].mv_image%>"  /></a>
+          <br></br><button type="button" id="btninfo" class="btn1-info"  onclick="mynum2('<%=i%>')">Info</button>  
+        </div>
+      </div>
+    <%}%> 
+  <%}%>
+  </div>
+<%}%>
+<%}%>
+
+<% if(count1==0){ %>
+  <% if(count2 != 0) { %>
+    <div class="movie">
+    <h2>Events</h2>
+    <% for(var i=0;i<mov.length;i++) { %>
+      <% var mv_type = String(mov[i].mv_type) %>
+      <% if(mv_type == "events"){ %>
+        <div id="movies" class="col-xs-18 col-sm-4 col-md-2 thumbnails">
+          <div class="thumbnail">
+            <input type="number" id="num" value="<%=i%>" placeholder="<%=i%>" disabled>
+            <a name="<%=mov[i]._id%>" id="<%=i%>" onclick="openForm1('<%=i%>')"><img  src="<%=mov[i].mv_image%>"  /></a>
+            <br></br><button type="button" id="btninfo" class="btn1-info" align="center" onclick="mynum2('<%=i%>')">Info</button>  
+          </div>
+        </div>
+      <%}%> 
+    <%}%>
+    </div>
+  <%}%>
+  <%}%>
+
+  <div class="form-popup" id="myForm">
+      <div class="form-container">
+        <b><h2 id="mvname" align="center"></h2></b>
+        <h4 id="lang" align="left" ></h4>
+        <h4 id="rating"></h4>
+        <h4><p id="desc"></p></h4>
+         <button type="button" class="btn book" onclick="">Book Tickets</button>
+        <bc><button type="button" class="btn cancel" onclick="closeForm()">Close</button></bc>
+      </div>
+    </div>
+
+    <!-- <div class="bg-modal"id="myForm12">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="popup">
+                <div class="popup-header">
+                  <a href="#" class="close">
+                    <div class="close"> <i class="fa fa-close"></i></div>
+                  </a>
+                </div>
+                <div class="popup-body">
+                    <b><h2 id="mvname" align="center">Select a city</h2></b>
+                    <h4 id="city" align="center" >
+                    <select>
+                        <option value="Bengaluru">Bengaluru</option>
+                        <option value="Mumbai">Mumbai</option>
+                        <option value="Kolkata">Kolkata</option>
+                        <option value="Delhi">Delhi</option>
+                      </select>
+                    </h4>
+                </div>
+                <div class="popup-footer">
+                  <ul>
+                      <button type="submit" class="btn book" onclick="">Select</button>
+                      <bc><button type="button" class="btn cancel" onclick="closeForm()">Close</button></bc>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+    <div class="form-popup" id="myForm12">
+        <div class="form-container">
+          <b><h2  align="center" style="color: aliceblue">Select a city</h2></b>
+          
+          <h4>
+              <div id="bengaluru">
+              <img src="https://render.fineartamerica.com/images/rendered/search/print/images/artworkimages/medium/1/bangalore-palace-phalguni-roy.jpg"style="width:50%" style="height:10%"align="center" >
+              <button type="submit" class="btn book" value="Bengaluru" onclick="city(this.value)" style="margin-left:30px">Bengaluru</button>
+            </div>
+            <div id="bengaluru">
+              <br><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUCSwCKkaYX1mcaoCWBlaGBny8Xrew9omtExcPKhrgxq_uMGpS"style="width:50%"style="height:10%" align="center" >
+              <button type="submit" class="btn book"value="Mumbai" onclick="city(this.value)" style="margin-left:30px">Mumbai</button>
+            </div>
+            <div id="bengaluru">
+                <img src="https://image.shutterstock.com/image-vector/cartoon-sketch-drawing-illustration-india-260nw-1062622610.jpg"style="width:50%"style="height:10%" align="center" >
+                 <button type="submit" class="btn book"value="Delhi" onclick="city(this.value)"style="margin-left:30px">Delhi</button>
+            </div>
+          </h4>
+          <br>
+          <br>
+          <bc><button type="button" class="btn cancel" align="center"onclick="closeForm12()">Close</button></bc>
+        </div>
+      </div>
+
+<script>
+   function selectcity(){
+    document.getElementById("myForm12").style.display = "block"; 
+    document.getElementsByClassName("form-container").fadeIn(500);
+   
+    document.getElementsByClassName("form-popup").fadeTo(500,0.5);
+    }
+    function city(a){
+      // window.alert(a);
+      var city=a;
+     
+      window.location.href= "/home/"+city;
+    }
+   
+   function openForm1(a) {
+       
+       var moviename,des,l,r;
+       <%for(var i=0;i<mov.length;i++){%>
+       if(a==<%=i%>){
+         moviename= "<%= String(mov[i].mvname) %>";
+         des= "<%= String(mov[i].mv_desc) %>";
+         l= "<%= String(mov[i].mv_lang) %>";
+         r= "<%= String(mov[i].mv_rating) %>";
+       }
+       <%}%>
+      
+       
+          
+       document.getElementById("myForm").style.display = "block";
+       document.getElementById("mvname").innerHTML=String(moviename);
+       document.getElementById("desc").innerHTML=String(des);
+       document.getElementById("lang").innerHTML=String(l);
+       document.getElementById("rating").innerHTML=String(r);
+       
+         
+     }
+     
+     function closeForm() {
+       document.getElementById("myForm").style.display = "none";
+     }
+     function closeForm12() {
+       document.getElementById("myForm12").style.display = "none";
+
+     }
+function myFunction(){
+ // window.alert();
+  window.location.reload;
+  //window.location.href= "/search";
+  }
+function mynum1(a){
+  
+  var moviename1
+  <%for(var i=0;i<mov.length;i++){%>
+  if(a==<%=i%>){
+    moviename1= "<%= String(mov[i].mvname) %>";
+    movieid="<%= String(mov[i].mv_id) %>"
+    var win=window.open( "/book/<%= String(mov[i].mvname)%>",'_blank');
+    win.focus();
+  }
+  <%}%> 
+}
+function mynum2(a){
+  
+  var eventname1
+  <%for(var i=0;i<mov.length;i++){%>
+  if(a==<%=i%>){
+    eventname1= "<%= String(mov[i].evname) %>";
+    eventid="<%= String(mov[i].ev_id) %>"
+    var win=window.open( "/booke/<%= String(mov[i].evname)%>",'_blank');
+    win.focus();
+  }
+  <%}%>
+ // window.alert(num);
+ // window.location.href= "/book/moviename1";
+  //return num;
+  
+}
+
+
+</script>
+
+</body>
+</html>

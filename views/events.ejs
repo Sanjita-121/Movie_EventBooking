@@ -141,7 +141,7 @@
 						<form action="event_reg/<%=userID%>" method="post">
 							<input type="text" name="uid" value="<%=userID%>" disabled hidden>
 							<input type="submit" value="Add Event" class="btn btn-primary" >
-							<button type="button" class="btn btn-primary">Modify Event</button>
+							<button type="button" class="btn btn-primary" onclick="mod()">Modify Event</button>
 					<button type="button" class="btn btn-primary" onclick="del()">Remove Event</button>
 				</form>
                     <!-- <button type="button" class="btn btn-primary">Modify Event</button>
@@ -158,9 +158,36 @@
                                             <% for(var i=0;i<result.length;i++){ %>
                                             <option><i><%=result[i].ename%></i></option>
                                             <%}%>
-                                        </select><br><br>
+										</select><br><br>
+									<h5 id="delhead">Choose venue:</h5><br>
+									<select id="edel" name="edelvenue" type="text">
+										<% for(var i=0;i<result.length;i++){ %>
+										<option><i><%=result[i].evenue%></i></option>
+										<%}%>
                                 <input type="submit" class="btn btn" value="Delete Event"><br>
 								<input type="button" class="btn cancel" value="Cancel" onclick="closedel()">
+								<input type="text" name="userid" value="<%=userID%>" disabled hidden>
+                            </form>
+                                 
+                            </div>
+						</div>
+						
+						<div class="form-popup2" id="myForm2">
+                            <div class="form-container2">
+                                      <form action="/event_modify/<%=userID%>" method="post">
+                                    <h5 id="modhead">Choose event name:</h5><br>
+                                    <select id="emod" name="emod" type="text">
+                                            <% for(var i=0;i<result.length;i++){ %>
+                                            <option><i><%=result[i].ename%></i></option>
+                                            <%}%>
+										</select><br><br>
+									<h5 id="modhead">Choose venue:</h5><br>
+									<select id="emod" name="emodvenue" type="text">
+										<% for(var i=0;i<result.length;i++){ %>
+										<option><i><%=result[i].evenue%></i></option>
+										<%}%>
+                                <input type="submit" class="btn btn" value="Modify Event"><br>
+								<input type="button" class="btn cancel" value="Cancel" onclick="closemod()">
 								<input type="text" name="userid" value="<%=userID%>" disabled hidden>
                             </form>
                                  
@@ -177,16 +204,47 @@
 		 
 		 
 			 
+	 }
+	 function mod() {
+		 
+		 
+		 
+		 document.getElementById("myForm2").style.display = "block";
+		 
+		 
+			 
      }
      
      function closedel() {
 		 
-		 
-		 
 		 document.getElementById("myForm1").style.display = "none";
+		 			 
+	 }
+	 function closemod() {
 		 
-		 
-			 
-	 }</script>
+		 document.getElementById("myForm2").style.display = "none";
+		 			 
+	 }
+	 
+
+
+				var optionValues =[];
+$('#edel option').each(function(){
+   if($.inArray(this.value, optionValues) >-1){
+      $(this).remove()
+   }else{
+      optionValues.push(this.value);
+   }
+});
+
+var optionValues =[];
+$('#emod option').each(function(){
+   if($.inArray(this.value, optionValues) >-1){
+      $(this).remove()
+   }else{
+      optionValues.push(this.value);
+   }
+});
+	 </script>
 	</body>
 </html>

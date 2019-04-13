@@ -1,6 +1,6 @@
 var MongoClient = require("mongodb").MongoClient;
 var url = "mongodb://localhost:27017/";
-
+var ObjectId = require("mongodb").ObjectID;
 const express = require("express");
 const app = express();
 var bodyParser = require("body-parser");
@@ -139,6 +139,7 @@ MongoClient.connect(url, function(err, db) {
 				}
 
 				var a = result;
+				
 
 				res.render("events", { result: a, userID: userID });
 
@@ -271,9 +272,46 @@ MongoClient.connect(url, function(err, db) {
 			});
 	});
 
+
+	app.post("/eventmodify/:userID", urlencodedParser, function(req, res) {
+		var userID = req.params.userID;
+		
+		var num = parseInt(req.body.eseats);
+		console.log(num);
+		var ecol = 10;
+		var erow = parseInt(num / 10);
+		console.log(ecol);
+		console.log(erow);
+		var my_id = { }
+		var myquery = { _id: ObjectId(req.body.uid) };
+		var idnew=req.body.uid;
+		console.log("idnew"+idnew);
+		var newvalues = { $set:{
+			userID:userID,
+			ename: req.body.ename,
+			elang: req.body.elang,
+			etype: req.body.etype,
+			etime: req.body.etime,
+			evenue: req.body.evenue,
+			eseats: req.body.eseats,
+			ecity: req.body.ecity,
+			edate: req.body.edate,
+			ecol: ecol,
+			erow: erow}
+		};
+		
+		dbo.collection("inventory").updateOne(myquery, newvalues, function(err, res) {
+			if (err) throw err;
+			console.log("1 document updated");
+			
+		  });
+				res.redirect("/events?id=" + userID);
+	});
+
 	app.post("/event_delete/:userID",urlencodedParser, function(req, res) {
 		var myquery = { ename: req.body.edel,
-						userID: req.params.userID
+						userID: req.params.userID,
+						evenue:req.body.edelvenue
 						 };
 		
 		var userID=req.params.userID;				
@@ -287,15 +325,46 @@ MongoClient.connect(url, function(err, db) {
 		res.redirect("/events?id="+userID);
 	});
 
+
+	app.post("/event_modify/:userID",urlencodedParser, function(req, res) {
+		var userID=req.params.userID;
+		var myquery = { ename: req.body.emod,
+			userID: req.params.userID,
+			evenue:req.body.emodvenue
+			 };
+
+			 dbo.collection("inventory")
+			 .find(myquery)
+			 .toArray(function(err, result) {
+				 if (err) throw err;
+ 
+				 if (result.length != 0) {
+					 flag = 1;
+ 
+					 console.log("available in profile");
+				 } else {
+					 flag = 0;
+					 console.log("not available in profile");
+				 }
+ 
+				 var a = result;
+ 
+				 res.render("event_modify", { result: a, userID: userID });
+ 
+				 
+			 });
+		
+	});
+
 	app.get("/profile/:userID",function(req,res){
 		var userID=req.params.userID;
-		
+		var myquery = { _id: ObjectId(userID) };
 
 		// var id=decodeURIComponent(userID);
 		// var o_id = new mongo.ObjectID(userID);
 		
 		dbo.collection("User")
-			.find({_id:userID})
+			.find(myquery)
 			.toArray(function(err, result) {
 				if (err) throw err;
 
@@ -316,6 +385,53 @@ MongoClient.connect(url, function(err, db) {
 			});
 		
 	})
+
+
+	app.post("/profilemodify/:userID", urlencodedParser, function(req, res) {
+		var userID = req.params.userID;
+		
+		
+		
+		var myquery = { _id: ObjectId(userID) };
+		
+		
+		var newvalues = { $set:{
+			u_name: req.body.uname,
+			u_email: req.body.umail,
+			u_phone: req.body.uphone,
+			u_city: req.body.ucity,
+			}
+		};
+		
+		dbo.collection("User").updateOne(myquery, newvalues, function(err, res) {
+			if (err) throw err;
+			console.log("1 document updated");
+			
+		  });
+				res.redirect("/profile/" + userID);
+	});
+
+
+	app.post("/passwordmodify/:userID", urlencodedParser, function(req, res) {
+		var userID = req.params.userID;
+		
+		
+		
+		var myquery = { _id: ObjectId(userID) };
+		
+		
+		var newvalues = { $set:{
+			u_password:req.body.newpass
+		}
+		};
+		
+		dbo.collection("User").updateOne(myquery, newvalues, function(err, res) {
+			if (err) throw err;
+			console.log("1 document updated");
+			
+		  });
+				res.redirect("/profile/" + userID);
+	});
 });
 
 app.listen(3005, function() {
