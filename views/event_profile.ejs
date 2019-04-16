@@ -1,0 +1,279 @@
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+			integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+			crossorigin="anonymous"
+		/>
+		<script
+			src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+			integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+			integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+			integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+			crossorigin="anonymous"
+		></script>
+		<link rel="stylesheet" type="text/css" href="/css/event_profile.css" />
+	</head>
+
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<a class="navbar-brand" href="#">MovieBooking</a>
+			<button
+				class="navbar-toggler"
+				type="button"
+				data-toggle="collapse"
+				data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent"
+				aria-expanded="false"
+				aria-label="Toggle navigation"
+			>
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="#"
+							>Home <span class="sr-only">(current)</span></a
+						>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Link</a>
+					</li>
+					<li class="nav-item dropdown">
+						<a
+							class="nav-link dropdown-toggle"
+							href="#"
+							id="navbarDropdown"
+							role="button"
+							data-toggle="dropdown"
+							aria-haspopup="true"
+							aria-expanded="false"
+						>
+							Dropdown
+						</a>
+						<div
+							class="dropdown-menu"
+							aria-labelledby="navbarDropdown"
+						>
+							<a class="dropdown-item" href="#">Action</a>
+							<a class="dropdown-item" href="#">Another action</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="#"
+								>Something else here</a
+							>
+						</div>
+					</li>
+					<li class="nav-item">
+						<a
+							class="nav-link disabled"
+							href="#"
+							tabindex="-1"
+							aria-disabled="true"
+							>Disabled</a
+						>
+					</li>
+				</ul>
+
+				<a href="/movie"
+					><button
+						class="btn btn-outline-success my-2 my-sm-0"
+						type="submit"
+					>
+						Log Out
+					</button>
+				</a>
+			</div>
+		</nav>
+
+		<div class="sidebar">
+			<a class="active" href="/profile/<%=userID%>">Profile</a>
+			<a href="/events?id=<%=userID%>">My Event List</a>
+			<a href="#report">My report</a>
+		</div>
+
+		<!-- Page content -->
+
+		<div class="content">
+			<form action="/profilemodify/<%=userID%>" method="post">
+				<input type="text" name="uid" value="<%=userID%>" hidden />
+				<br />
+				<h5>Name</h5>
+
+				<input
+					type="text"
+					name="uname"
+					value="<%=result[0].u_name%>"
+					disabled
+				/><br />
+				<h5>Email ID</h5>
+
+				<input
+					type="text"
+					name="umail"
+					value="<%=result[0].u_email%>"
+					disabled
+				/><br />
+				<h5>Phone Number</h5>
+
+				<input
+					type="text"
+					name="uphone"
+					value="<%=result[0].u_phone%>"
+					disabled
+				/><br />
+				<h5>City</h5>
+
+				<input
+					type="text"
+					name="ucity"
+					value="<%=result[0].u_city%>"
+					disabled
+				/>
+				<br />
+				
+				<button
+					type="button"
+					class="btn btn-outline-info"
+					name="edit"
+					value="edit"
+					id="subbutton"
+				>
+					Edit
+				</button>
+				<input
+					type="submit"
+					class="btn btn-outline-success"
+					name="submit"
+					value="submit"
+					id="subbutton"
+				/>
+				<button
+					type="button"
+					class="btn btn-danger"
+					name="change"
+					id="subbutton1"
+					onclick="openpass()"
+				>
+					Change Password</button
+				><br />
+			</form>
+
+			<div class="form-popup1" id="myForm1">
+				<div class="form-container1">
+					<form action="/passwordmodify/<%=userID%>" method="post">
+						<h5>Enter old password:</h5>
+						<input
+							type="password"
+							name="oldpass"
+							id="oldpass"
+							placeholder="old password"
+						/>
+						<h5>Enter new password:</h5>
+						<input
+							type="password"
+							name="newpass"
+							id="newpass"
+							placeholder="new password"
+						/>
+						<h5>Confirm password:</h5>
+						<input
+							type="password"
+							name="confpass"
+							id="confpass"
+							placeholder="Confirm password"
+						/>
+
+						<input
+							type="submit"
+							class="btn btn"
+							value="Confirm Password"
+							id="checkp"
+							
+						/>
+						<input
+							type="button"
+							class="btn cancel"
+							value="Cancel"
+							onclick="closepass()"
+						/>
+						<input
+							type="text"
+							name="userid"
+							value="<%=userID%>"
+							disabled
+							hidden
+						/>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("form input[type=text],input[type=number],select").prop(
+					"disabled",
+					true
+				);
+				$("button[name=edit]").on("click", function() {
+					$("input[type=text],input[type=number],select").removeAttr(
+						"disabled"
+					);
+				});
+				$("button[name=change]").on("click", function() {
+					$("input[name=upass],select").removeAttr(
+						"hidden disabled"
+					);
+					$("button[name=confirm],select").removeAttr(
+						"hidden"
+					);
+				});
+			});
+			document.getElementById("checkp").addEventListener("click",function(){
+				var a="<%=String(result[0].u_password)%>";
+				checkpass(a);
+			})
+			function openpass(){
+					document.getElementById("myForm1").style.display = "block";
+			}
+			function closepass(){
+				document.getElementById("myForm1").style.display="none";
+			}
+			function checkpass(result){
+				var oldpass= document.getElementById("oldpass").value;
+				console.log(oldpass);
+				
+				var newpass= document.getElementById("newpass").value;
+				console.log(newpass);
+				var confpass= document.getElementById("confpass").value;
+				console.log(confpass);
+				var dbpass=result;
+				console.log(dbpass);
+				if(oldpass == result){
+					if(newpass==confpass){
+						document.getElementById("pass").value=newpass;
+					}
+				}else{
+					document.getElementById("pass").value="hello";
+				}
+				document.getElementById("myForm1").style.display="none";
+			}
+		</script>
+	</body>
+</html>

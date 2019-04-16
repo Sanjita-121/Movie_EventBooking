@@ -1,0 +1,38 @@
+<html>
+	<head>
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+			crossorigin="anonymous"
+		/>
+		<link rel="stylesheet" type="text/css" href="/css/checkout.css" />
+	</head>
+	<body id="bodycss" style="background-color:blueviolet;">
+
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                     <a class="navbar-brand" href="#">MovieBooking</a>
+                    
+                </nav>
+        
+        <div class="row">
+                <div class="form-popup" id="myForm">
+                        <div class="form-container">
+                            <h1 align="center" style="color:blueviolet"><b>Booked!!</b></h1><br><br>
+                            <h3 align="center">Here are your seat numbers:</h3><br>
+                            <h3 align="center" id="cust_seats"></h3>
+                            <script>
+                           
+                           window.onload=function(){
+                               var out=localStorage.getItem("storagename");
+                               document.getElementById('cust_seats').innerHTML=out;
+                           }
+                            </script>
+                            
+                            
+                            
+                        </div>
+                    </div>
+        </div>
+    </body>
+</html>

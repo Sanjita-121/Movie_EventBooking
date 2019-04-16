@@ -1,0 +1,33 @@
+#backbody{
+    background-color: blueviolet;
+}
+.form-center{
+    padding-top: 20px;
+    background-color: white;
+    border-radius: 5%;
+    margin-top: 5%;
+    
+}
+#submit-button{
+    margin-bottom: 30px;
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom:1px solid #000;
+    outline: none;
+  }
+
+  input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom:1px solid #000;
+    outline: none;
+  }

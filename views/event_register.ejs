@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+			crossorigin="anonymous"
+		/>
+		<link rel="stylesheet" type="text/css" href="/css/event_register.css" />
+	</head>
+	<body id="backbody">
+		<div class="row">
+			<div class="col-md-4 left"></div>
+			<div class="col-md-4 form-center">
+				<form action="/eventsubmit/<%=userID%>" method="post">
+					<input type="text" name="uid" value="<%=userID%>" disabled hidden>
+					<h5>Event name</h5>
+					<input
+						type="text"
+						placeholder="Name"
+						name="ename"
+					/><br /><br />
+					<h5>Language</h5>
+					<input
+						type="text"
+						placeholder="Language"
+						name="elang"
+					/><br /><br />
+					<h5>Description</h5>
+					<input
+						type="textarea"
+						name="edesc"
+					/><br /><br />
+					<h5>Rating</h5>
+					<input
+						type="number"
+						
+						name="erating"
+					/><br /><br />
+					<h5>Image URL</h5>
+					<input
+						type="url"
+						
+						name="eimg"
+					/><br /><br />
+					<h5>Time Slot</h5>
+					<select id="etime" name="etime" type="text">
+						<option>Morning (9:00AM-11:30AM)</option>
+						<option>Noon (12:30PM-3:00PM)</option>
+						<option>Evening (7:00PM-9:30PM)</option>
+					</select><br><br>
+					<h5>Venue</h5>
+					<select id="evenue" name="evenue" type="text">
+						<% for(var i=0;i<venue.length;i++){ %>
+							<option><%=venue[i].v_name%></option>
+							<%}%>>
+						
+					</select><br /><br />
+                    <h5>Number of seats</h5>
+					<input
+						type="number"
+						
+						name="eseats"
+					/><br /><br />
+					<h5>Location</h5>
+					<input
+						type="text"
+						placeholder="City"
+						name="ecity"
+					/><br /><br />
+					<h5>Event Date</h5>
+					<input
+						type="date"
+						placeholder="dd/mm/yyyy"
+						name="edate"
+					/><br /><br />
+					<h5>Price</h5>
+					<input
+						type="text"
+						
+						name="eprice"
+					/><br /><br />
+					<input
+						class="btn btn-block btn-lg btn-primary submit"
+						id="submit-button"
+						type="submit"
+						value="Add Event"
+					/>
+				</form>
+			</div>
+			<div class="col-md-4 right"></div>
+		</div>
+	</body>
+</html>

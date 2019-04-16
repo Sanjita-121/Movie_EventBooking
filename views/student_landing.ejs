@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../movie_landing.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body >
+     
+<div class="row">
+  <div class="column left">
+   </div>
+  <div class="column middle">
+ </div>
+  <div class="column right">
+   <div class="btn-group">
+ 
+ </div>
+  </div>
+</div>
+
+<div class="leftside">
+</div>
+
+<form id="update" action="/add" method="get" name="form1">
+  <table width="25%" border="0">
+      
+      <tr> 
+         
+          <td>Enter Name</td>
+          <td><input type="text" name="name" id="name"  /></td>
+      </tr>
+      <tr> 
+          <td>Status</td>
+          <td><input type="text" name="status" /></td>
+      </tr>
+     
+      <tr> 
+          <td></td>
+          <td><input type="submit" name="Submit" value="ADD" /></td>
+      </tr>
+     
+  </table>
+</form>
+
+<% for(var i=0;i<student.length;i++) { %>
+<h1><%=student[i].mv_name%></h1><br>
+ <%=student[i].status%>
+ <%}%>
+ <!-- <% var present = 0 %>
+    <% var absent = 0 %>
+ <% for(var i=0;i<student.length;i++) { %>
+    
+    <% if(student[i].status == "present") { %>
+      <% present++ %>
+     <%}%>
+     <% if(student[i].status == "absent") { %>
+      <% absent++ %>
+     <%}%>
+     <%}%>
+     <h3> No. of students present  <%=present %></h3>
+     <h3> No. of students absent <%=absent %></h3>  -->
+
+
+</body>
+</html>
