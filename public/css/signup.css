@@ -1,0 +1,55 @@
+#backbody{
+    background-color: blueviolet;
+    /* background-image: url('https://www.pedestrian.tv/content/uploads/2019/03/dead-1-637x397.jpg'); */
+    background-repeat: no-repeat;
+    background-size: 100%;
+    height: auto;
+}
+.form-center{
+    padding-top: 10px;
+    background-color: white;
+    border-radius: 5%;
+    margin-top: 1%;
+    opacity: 0.9;
+    
+}
+
+.form-center:hover{
+    background-color: white;
+    opacity: 1;
+}
+#submit-button{
+    margin-bottom: 60px;
+    
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 6px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom:1px solid #000;
+    outline: none;
+  }
+  input[type=radio] {
+   
+    padding: 6px 20px;
+    margin: 8px 0;
+    
+    outline: none;
+  }
+
+  input[type=password] {
+    width: 100%;
+    padding: 6px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom:1px solid #000;
+    outline: none;
+  }
+
+  .hidden{
+      visibility: hidden;
+  }
