@@ -206,27 +206,34 @@
     }
 
     function signincheck(){
-      var eusername=String(document.getElementById('user').value);
-      var epassword=String(document.getElementById('pass').value);
-      var datalength="<%=leng%>";
-      var len=parseInt(datalength);
-      window.alert(len);
-      for (var i = 0; i < len; i++) {
-        var dataname="<%=user[i].u_name%>"
-        var datapass="<%=user[i].u_password%>"
-        console.log(dataname);
-        console.log(datapass);
-        console.log("Entered",eusername);
-        console.log("Entered",epassword);
-        if(eusername==dataname&& epassword==datapass){
-          window.alert("matched")
-        }
-        else{
-          document.getElementById('warn').innerHTML="PLease enter valid credentials"
-        }
-        
+      var username=String(document.getElementById('user').value);
+      var password=String(document.getElementById('pass').value);
+    var creds = {
+      username: username,
+      password: password
+    }
+    var request = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(creds),
+    }
+    console.log(request);
+    fetch(`/loginCheck`, request)
+    .then(res => res.json())
+    .then(user => {
+      if (user._id) {
+      location.assign('/events?id=' + user._id)
+      } else {
+        document.getElementById('warn').innerHTML= 'Invalid credentials';
       }
-      console.log(datalength);
+    })
+    .catch(err => {
+      document.getElementById('warn').innerHTML= err;
+      console.log('Error is', err)
+    })
+
     }
   
 

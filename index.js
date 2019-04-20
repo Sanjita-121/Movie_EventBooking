@@ -7,7 +7,12 @@ var bodyParser = require("body-parser");
 var async = require("async");
 app.set("view engine", "ejs");
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
-
+app.use(bodyParser.json());
+app.use(
+	bodyParser.urlencoded({
+		extended: true
+	})
+);
 app.use(express.static(__dirname + "/public"));
 app.set("port", process.env.PORT || 3000);
 
@@ -18,6 +23,27 @@ MongoClient.connect(url, function(err, db) {
 	var movdata = [];
 	var pro = [];
 	var leng;
+	app.get("/", function (req,res) {
+		res.redirect('/home');
+	});
+	app.post('/loginCheck', function(req, res) {
+		console.log('Req body in login ', req.body)
+		dbo.collection('User').findOne({ u_name: req.body.username}, function(err, user) {
+			console.log('User found ');
+			// In case the user not found   
+			if(err) {
+			  console.log('THIS IS ERROR RESPONSE')
+			  res.json(err)
+			}
+			if (user && user.u_password === req.body.password){
+			  console.log('User and password is correct')
+			  res.json(user);
+			} else {
+			  console.log("Credentials wrong");
+			  res.json({data: "Login invalid"});
+			}              
+	 });
+	  })
 	app.get("/home", function(req, res) {
 		var userID = req.query.id;
 		dbo.collection("movies")
@@ -30,26 +56,10 @@ MongoClient.connect(url, function(err, db) {
 						mov[i] = result[i];
 					}
 
-					dbo.collection("User")
-						.find()
-						.toArray(function(err, results) {
-							if (err) {
-								console.log(err);
-							} else {
-								for (i = 0; i < results.length; i++) {
-									user[i] = results[i];
-								}
-								leng=results.length;
-								console.log("\n\n\n\n", user);
-								console.log("\n\n\n\n", leng);
-							}
-							res.render("movie_landing", {
-								mov: mov,
-								userID: userID,
-								user: user,
-								leng:leng
-							});
-						});
+					res.render("movie_landing", {
+						mov: mov,
+						userID: userID
+					});
 				}
 				//	res.render("movie_landing", { mov: mov, userID: userID });
 			});
