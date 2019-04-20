@@ -1,0 +1,30 @@
+{
+  "name": "amazon_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "async": "^2.6.2",
+    "bson": "^4.0.1",
+    "eslint": "^5.15.1",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "mongodb": "^3.1.13",
+    "mongoose": "^5.4.16",
+    "querystring": "^0.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sanjita-121/Movie_EventBooking.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Sanjita-121/Movie_EventBooking/issues"
+  },
+  "homepage": "https://github.com/Sanjita-121/Movie_EventBooking#readme"
+}
