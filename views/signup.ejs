@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="/css/signup.css">
+</head>
+<body id="backbody">
+    <div class="row">
+        <div class="col-md-4 left">
+
+        </div>
+    <div class="col-md-4 form-center">
+        <form action="/signupsubmit" method="post" onsubmit="return checkpass(this);">
+            <h5>Username</h5>
+            <input type="text" placeholder="username" name="username"><br>
+            <h5>Email Id</h5>
+            <input type="text" placeholder="abc@gmail.com" name="email"><br>
+            <h5>City</h5>
+            <input type="text" placeholder="City" name="city"><br>
+            <h5>Password</h5>
+            <input type="password" id="pass" placeholder="Password" name="pass">
+            <h5>Confirm Password</h5>
+            <input type="password" placeholder="Password" name="pass1"  id="cpass">
+            <span class="emsg6 hidden" id="pass_match" style="color:red;" >Password not matched</span>
+            <h5>Signup as:</h5>
+            <input type="radio" value="User" placeholder="User" name="customer">User<br>
+            <input type="radio" value="Event Manager" name="customer">Event Manager<br>
+            <h5>Contact number</h5>
+            <input type="text" placeholder="Mobile number" name="phone" ><br><br>
+            <input class="btn btn-block btn-lg btn-primary submit" id="submit-button"  type="submit" value="Register">
+        </form>
+    </div>
+    <div class="col-md-4 right">
+            
+        </div>
+    </div>
+<script>
+function checkpass(){
+        var pass=document.getElementById('pass').value;
+        var cpass=document.getElementById('cpass').value;
+        if (pass != cpass)
+    {
+        // window.alert("WRong entry");
+         document.getElementById('pass_match').style.visibility='visible';
+        
+        return false;
+    } else {
+        return true;
+    }
+       
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../movie_landing.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body >
+     
+<div class="row">
+  <div class="column left">
+   </div>
+  <div class="column middle">
+ </div>
+  <div class="column right">
+   <div class="btn-group">
+ 
+ </div>
+  </div>
+</div>
+
+<form action="/display">
+  name: <input type="text" name="stname"><br>
+  <input type="submit" value="Submit">
+</form>
+<div class="leftside">
+</div>
+<% for(var i=0;i<student1.length;i++) { %>
+  <h1><%=student1[i].mv_name%></h1><br>
+  <%=student1[i].status%>
+  <%}%>
+  
+</body>
+</html>
