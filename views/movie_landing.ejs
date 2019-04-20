@@ -118,14 +118,15 @@
   <div class="form-popup1" id="myForm1">
     <div class="form-container1">
       <form action="/signin" method="post">
+        <h5 id="warn"></h5>
         <h5>Username</h5>
-        <input type="text" placeholder="username" name="user"><br>
+        <input type="text" placeholder="username" id="user" name="user"><br>
         <h5>Password</h5>
-        <input type="password" placeholder="password" name="pass"><br>
+        <input type="password" placeholder="password" id="pass" name="pass"><br>
         <h5>Sign in as:</h5>
         <input type="radio" value="User" placeholder="User" name="customer"><b>User</b>
         <input type="radio" value="Event Manager" name="customer" id="radioevent"><b>Event Manager</b><br><br>
-        <input type="submit" class="btn cancel" value="Sign In">
+        <input type="button" class="btn cancel" onclick="signincheck()" value="Sign In">
       </form>
 
     </div>
@@ -146,38 +147,7 @@
     </div>
   </div>
 
-  <!-- <div class="bg-modal"id="myForm12">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="popup">
-                <div class="popup-header">
-                  <a href="#" class="close">
-                    <div class="close"> <i class="fa fa-close"></i></div>
-                  </a>
-                </div>
-                <div class="popup-body">
-                    <b><h2 id="mvname" align="center">Select a city</h2></b>
-                    <h4 id="city" align="center" >
-                    <select>
-                        <option value="Bengaluru">Bengaluru</option>
-                        <option value="Mumbai">Mumbai</option>
-                        <option value="Kolkata">Kolkata</option>
-                        <option value="Delhi">Delhi</option>
-                      </select>
-                    </h4>
-                </div>
-                <div class="popup-footer">
-                  <ul>
-                      <button type="submit" class="btn book" onclick="">Select</button>
-                      <bc><button type="button" class="btn cancel" onclick="closeForm()">Close</button></bc>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
+  
 
   <div class="form-popup" id="myForm12">
     <div class="form-container">
@@ -218,7 +188,6 @@
     function signin() {
       document.getElementById("myForm12").style.display = "block"; 
       var myvar = "<%=String(userID)%>";
-      // window.alert( myvar+typeof myvar);
       
       if (myvar==="undefined") {
    
@@ -236,6 +205,29 @@
       }
     }
 
+    function signincheck(){
+      var eusername=String(document.getElementById('user').value);
+      var epassword=String(document.getElementById('pass').value);
+      var datalength="<%=leng%>";
+      var len=parseInt(datalength);
+      window.alert(len);
+      for (var i = 0; i < len; i++) {
+        var dataname="<%=user[i].u_name%>"
+        var datapass="<%=user[i].u_password%>"
+        console.log(dataname);
+        console.log(datapass);
+        console.log("Entered",eusername);
+        console.log("Entered",epassword);
+        if(eusername==dataname&& epassword==datapass){
+          window.alert("matched")
+        }
+        else{
+          document.getElementById('warn').innerHTML="PLease enter valid credentials"
+        }
+        
+      }
+      console.log(datalength);
+    }
   
 
 
@@ -303,6 +295,7 @@
         }
   <%}%> 
 }
+
     function mynum2(a) {
 
       var eventname1
