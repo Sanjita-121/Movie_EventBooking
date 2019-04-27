@@ -124,8 +124,8 @@
         <h5>Password</h5>
         <input type="password" placeholder="password" id="pass" name="pass"><br>
         <h5>Sign in as:</h5>
-        <input type="radio" value="User" placeholder="User" name="customer"><b>User</b>
-        <input type="radio" value="Event Manager" name="customer" id="radioevent"><b>Event Manager</b><br><br>
+        <input type="radio" value="User" placeholder="User" name="customer" id="usertype"><b>User</b>
+        <input type="radio" value="Event Manager" name="customer" id="eventtype"><b>Event Manager</b><br><br>
         <input type="button" class="btn cancel" onclick="signincheck()" value="Sign In">
       </form>
 
@@ -208,9 +208,14 @@
     function signincheck(){
       var username=String(document.getElementById('user').value);
       var password=String(document.getElementById('pass').value);
+      
+      var usertype=document.getElementById('usertype').checked;
+      var eventtype=document.getElementById('eventtype').checked;
+      
     var creds = {
       username: username,
-      password: password
+      password: password,
+      
     }
     var request = {
       method: 'POST',
@@ -223,8 +228,10 @@
     fetch(`/loginCheck`, request)
     .then(res => res.json())
     .then(user => {
-      if (user._id) {
-      location.assign('/events?id=' + user._id)
+      if (user._id && eventtype) {
+        console.log(user._id);
+       location.assign('/events?id=' + user._id)
+     
       } else {
         document.getElementById('warn').innerHTML= 'Invalid credentials';
       }

@@ -177,7 +177,7 @@
 
 			<div class="form-popup1" id="myForm1">
 				<div class="form-container1">
-					<form action="/passwordmodify/<%=userID%>" method="post">
+					<form action="/passwordmodify/<%=userID%>" method="post" onsubmit="return checkpass(this);">
 						<h5>Enter old password:</h5>
 						<input
 							type="password"
@@ -189,6 +189,8 @@
 						<input
 							type="password"
 							name="newpass"
+							pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+							title="Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters"
 							id="newpass"
 							placeholder="new password"
 						/>
@@ -245,32 +247,43 @@
 					);
 				});
 			});
-			document.getElementById("checkp").addEventListener("click",function(){
-				var a="<%=String(result[0].u_password)%>";
-				checkpass(a);
-			})
+			// document.getElementById("checkp").addEventListener("click",function(){
+			// 	var a="<%=String(result[0].u_password)%>";
+			// 	checkpass(a);
+			// })
 			function openpass(){
 					document.getElementById("myForm1").style.display = "block";
+					var result="<%=String(result[0].u_password)%>";
+					
 			}
 			function closepass(){
 				document.getElementById("myForm1").style.display="none";
 			}
-			function checkpass(result){
+			function checkpass(){
+				var result="<%=String(result[0].u_password)%>";
 				var oldpass= document.getElementById("oldpass").value;
-				console.log(oldpass);
+				
 				
 				var newpass= document.getElementById("newpass").value;
-				console.log(newpass);
+				
 				var confpass= document.getElementById("confpass").value;
-				console.log(confpass);
+				
 				var dbpass=result;
-				console.log(dbpass);
+			
 				if(oldpass == result){
+					
 					if(newpass==confpass){
-						document.getElementById("pass").value=newpass;
+						
+						return true;
+					}
+					else{
+						window.alert("Passwords don't match");
+						return false;
 					}
 				}else{
-					document.getElementById("pass").value="hello";
+					
+					window.alert("Wrong previous password");
+					return false;
 				}
 				document.getElementById("myForm1").style.display="none";
 			}

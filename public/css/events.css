@@ -202,3 +202,62 @@ input[type=text] {
     margin-left: 90px;
     font-style: italic
 }
+#emodevent{
+  height: 50px;
+  width: 300px;
+  font-size: 21px;
+  color: brown;
+  margin-left: 90px;
+  font-style: italic
+}
+
+
+
+.form-popup3 {
+	display: none;
+	position: fixed;
+	bottom: 170px;
+	right: 360px;
+	border: 3px solid #f1f1f1;
+	z-index: 9;
+	border-radius: 20px;
+}
+
+/* Add styles to the form container */
+.form-container3 {
+	width: 500px;
+	height: 450px;
+	padding: 10px;
+	background-color: lightskyblue;
+    padding-top: 20px;
+    border-radius: 20px;
+}
+
+/* Full-width input fields */
+
+/* Set a style for the submit/login button */
+.form-container3 .btn {
+	background-color: #4caf50;
+	color: white;
+    padding: 16px 20px;
+    margin-left: 40px;
+	border: none;
+	cursor: pointer;
+	width: 80%;
+    margin-bottom: 5px;
+    margin-top: 20px;
+    opacity: 0.8;
+    
+}
+
+/* Add a red background color to the cancel button */
+.form-container3 .cancel {
+	background-color: red;
+	margin-bottom: 5px;
+}
+
+/* Add some hover effects to buttons */
+.form-container3 .btn:hover,
+.open-button:hover {
+	opacity: 1;
+}

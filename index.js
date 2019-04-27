@@ -23,27 +23,30 @@ MongoClient.connect(url, function(err, db) {
 	var movdata = [];
 	var pro = [];
 	var leng;
-	app.get("/", function (req,res) {
-		res.redirect('/home');
+	app.get("/", function(req, res) {
+		res.redirect("/home");
 	});
-	app.post('/loginCheck', function(req, res) {
-		console.log('Req body in login ', req.body)
-		dbo.collection('User').findOne({ u_name: req.body.username}, function(err, user) {
-			console.log('User found ');
-			// In case the user not found   
-			if(err) {
-			  console.log('THIS IS ERROR RESPONSE')
-			  res.json(err)
+	app.post("/loginCheck", function(req, res) {
+		console.log("Req body in login ", req.body);
+		dbo.collection("User").findOne({ u_name: req.body.username }, function(
+			err,
+			user
+		) {
+			console.log("User found ");
+			// In case the user not found
+			if (err) {
+				console.log("THIS IS ERROR RESPONSE");
+				res.json(err);
 			}
-			if (user && user.u_password === req.body.password){
-			  console.log('User and password is correct')
-			  res.json(user);
+			if (user && user.u_password === req.body.password) {
+				console.log("User and password is correct");
+				res.json(user);
 			} else {
-			  console.log("Credentials wrong");
-			  res.json({data: "Login invalid"});
-			}              
-	 });
-	  })
+				console.log("Credentials wrong");
+				res.json({ data: "Login invalid" });
+			}
+		});
+	});
 	app.get("/home", function(req, res) {
 		var userID = req.query.id;
 		dbo.collection("movies")
@@ -94,210 +97,123 @@ MongoClient.connect(url, function(err, db) {
 		res.render("signup");
 	});
 
-	// app.get("/events", function(req, res) {
-	// 	var userID = req.query.id;
-	// 	var resultArray = {
-	// 		movies: [],
-	// 		venue: []
-	// 	};
-	// 	dbo.collection("Inventory")
-	// 		.find({ userID: userID })
-	// 		.toArray(function(err, result) {
-	// 			if (err) throw err;
-
-	// 			if (result.length != 0) {
-	// 				flag = 1;
-	// 				console.log("available");
-	// 			} else {
-	// 				//do nothing
-	// 			}
-
-	// 			for (var i = 0; i < result.length; i++) {
-	// 				var movie = dbo
-	// 					.collection("movies")
-	// 					.find({ _id: result[i].more_id });
-	// 				// var venues = dbo.collection("venue").find({ _id: a[i].ven_id });
-
-	// 				movie.forEach(function(doc, err) {
-	// 					resultArray.movies.push(doc);
-	// 				});
-	// 				var venues = dbo
-	// 					.collection("venue")
-	// 					.find({ _id: result[i].ven_id });
-	// 				venues.forEach(function(doc, err) {
-	// 					resultArray.venue.push(doc);
-	// 				});
-	// 				//cursor close });
-	// 			} //for loop}
-
-	// 			//db.close();
-	// 			console.log(resultArray);
-	// 			res.render("events", {
-	// 				movies: resultArray.movies,
-	// 				venue: resultArray.venue,
-	// 				userID: userID,
-	// 				result: result
-	// 			});
-	// 		});
-	// });
-
-	// app.get("/events", function(req, res) {
-	// 	var userID = req.query.id;
-	// 	var resultArray = {
-	// 		movies: [],
-	// 		venue: []
-	// 	};
-	// 	dbo.collection("Inventory")
-	// 		.find({ userID: userID })
-	// 		.toArray(function(err, result) {
-	// 			if (err) throw err;
-
-	// 			if (result.length != 0) {
-	// 				flag = 1;
-	// 				console.log("available");
-	// 			} else {
-	// 				//do nothing
-	// 			}
-
-	// 			async.parallel(
-	// 				[
-	// 					function(callback) {
-	// 						for (var i = 0; i < result.length; i++) {
-	// 							// 	movies=dbo.collection("movies").find({ _id: result[i].more_id }).toArray(function(err, result) {
-	// 							// 	return callback(err, result);
-	// 							//   });
-
-	// 							var movie = dbo
-	// 								.collection("movies")
-	// 								.find({ _id: result[i].more_id });
-
-	// 							movie.forEach(function(doc, err) {
-	// 								resultArray.movies.push(doc);
-	// 								return callback(doc, err);
-	// 							});
-	// 						}
-	// 					},
-	// 					function(callback) {
-	// 						for (var i = 0; i < result.length; i++) {
-	// 							// db.collection("venue")
-	// 							// 	.find({ _id: result[i].ven_id })
-	// 							// 	.toArray(function(err, results) {
-	// 							// 		return callback(err, results);
-	// 							// 	});
-
-	// 							var venue = dbo
-	// 								.collection("venue")
-	// 								.find({ _id: result[i].ven_id });
-
-	// 							venue.forEach(function(doc, err) {
-	// 								resultArray.venue.push(doc);
-	// 								return callback(doc, err);
-	// 							});
-	// 						}
-	// 					}
-	// 				],
-	// 				function(err, results) {
-	// 					if (err) {
-	// 						// @todo: handle the error
-	// 					}
-	// 					console.log(resultArray);
-	// 					res.render("events", {
-	// 						movies: resultArray.movies,
-	// 						venue: resultArray.venue,
-	// 						userID: userID,
-	// 						result: result
-	// 					});
-	// 				}
-	// 			);
-	// 		});
-	// });
-
-	app.get("/events", function(req, res) {
-		var userID = req.query.id;
-		var resultArray = {
-			movies: [],
-			venue: []
-		};
-		dbo.collection("Inventory")
-			.find({ userID: userID })
-			.toArray(function(err, result) {
-				if (err) throw err;
-
-				if (result.length != 0) {
-					flag = 1;
-					console.log("available");
-				} else {
-					//do nothing
-				}
-				console.log("REsult", result);
-				var tasks = [
-					function(callback) {
-						for (var i = 0; i < result.length; i++) {
-							console.log("value", result[i]);
-							var movie = dbo
-								.collection("movies")
-								.find({ _id: result[i].more_id });
-
-							movie.forEach(function(doc, err) {
-								console.log("Document",doc);
-								resultArray.movies.push(doc);
-								console.log("movies loop");
-								console.log("\n\n arrays loop\n\n\n", resultArray.movies);
-							});
-						}
-						console.log("\n\n", resultArray.movies);
-						callback();
-					},
-
-					function(callback) {
-						for (var i = 0; i < result.length; i++) {
-							var venue = dbo
-								.collection("venue")
-								.find({ _id: result[i].ven_id });
-
-							venue.forEach(function(doc, err) {
-								resultArray.venue.push(doc);
-								console.log("venue loop");
-							});
-						}
-						console.log("\n\n", resultArray.venue);
-						console.log("\n\n\n\nResultArray is:",resultArray);
-						callback();
-					}
-				];
-
-				async.parallel(tasks, function(err) {
-					res.render("events", {
-						movies: resultArray.movies,
-						venue: resultArray.venue,
-						userID: userID,
-						result: result
-					});
-				});
-			});
+	app.get("/loadevent/:userID", function(req, res) {
+		var userID = req.params.userID;
+		res.render("events?id=" + userID);
 	});
 
 	app.get("/events", function(req, res) {
 		var userID = req.query.id;
-		var resultArray = {
-			movies: [],
-			venue: []
-		};
-		dbo.collection("Inventory")
-			.find({ userID: userID })
-			.toArray(function(err, result) {
-				if (err) throw err;
+		
+		var venue = [];
+		var movies = [];
+		var flag1 = 0;
+		var flag2 = 0;
+		var count1 = 0;
+		var count = 0;
+		var element = [];
+		var element1 = [];
+		var result1;
+		var tasks = [
+			function(callback) {
+				dbo.collection("Inventory")
+					.find({ userID: userID })
+					.toArray(function(err, result) {
+						if (err) return callback(err);
+						if (result.length != 0) {
+							result1 = result;
+							
+							callback();
+							
+						} else {
+							result1 = [];
+							
+							callback();
+						}
+					});
+			},
+			function(callback) {
+				dbo.collection("Inventory")
+					.find({ userID: userID })
+					.toArray(function(err, result) {
+						if (err) throw err;
+						if (result.length != 0) {
+							console.log('in movie');
+							for (var i = 0; i < result.length; i++) {
+								var movie = dbo
+									.collection("movies")
+									.find({ _id: result[i].more_id });
 
-				if (result.length != 0) {
-					flag = 1;
-					console.log("available");
-				} else {
-					//do nothing
-				}
-				console.log("REsult", result);
+								movie.forEach(function(doc, err) {
+									element = doc;
+									movies.push(element);
 
-				});
+									count++;
+
+									if (count == result.length) {
+										flag1 = 1;
+										if (flag1) {
+											callback();
+										}
+									}
+								});
+							}
+						} else {
+							movies = [];
+							callback();
+						}
+					});
+			},
+
+			function(callback) {
+				dbo.collection("Inventory")
+					.find({ userID: userID })
+					.toArray(function(err, result) {
+						if (err) throw err;
+						console.log('in venuer');
+						if (result.length != 0) {
+							for (var i = 0; i < result.length; i++) {
+								var venues = dbo
+									.collection("venue")
+									.find({ _id: result[i].ven_id });
+
+								venues.forEach(function(doc, err) {
+									element1 = doc;
+									venue.push(element1);
+
+									count1++;
+
+									if (count1 == result.length) {
+										flag2 = 1;
+										if (flag2) {
+											callback();
+										}
+									}
+								});
+							}
+							
+						} else {
+							//do nothing
+							venue = [];
+							callback();
+						}
+
+						
+					});
+			}
+		];
+		async.parallel(tasks, function(err) {
+			if (err) return next(err);
+		
+			console.log('in render');
+			res.render("events", {
+				movies: movies,
+				venue: venue,
+				userID: userID,
+				result: result1
 			});
+		});
+	});
 
 	app.post("/signin", urlencodedParser, function(req, res) {
 		var a = req.body.user;
@@ -486,111 +402,243 @@ MongoClient.connect(url, function(err, db) {
 			);
 		});
 	});
-	// 	dbo.collection("movies").find(check).toArray(function (err, result) {
-	// 		if (err) {
-	// 			console.log(err);
+
+	// app.post("/eventmodify/:userID", urlencodedParser, function(req, res) {
+	// 	var userID = req.params.userID;
+
+	// 	var num = parseInt(req.body.eseats);
+	// 	console.log(num);
+	// 	var ecol = 10;
+	// 	var erow = parseInt(num / 10);
+	// 	console.log(ecol);
+	// 	console.log(erow);
+	// 	var my_id = {};
+	// 	var myquery = { _id: ObjectID(req.body.uid) };
+	// 	var idnew = req.body.uid;
+	// 	console.log("idnew" + idnew);
+	// 	var newvalues = {
+	// 		$set: {
+	// 			userID: userID,
+	// 			ename: req.body.ename,
+	// 			elang: req.body.elang,
+	// 			etype: req.body.etype,
+	// 			etime: req.body.etime,
+	// 			evenue: req.body.evenue,
+	// 			eseats: req.body.eseats,
+	// 			ecity: req.body.ecity,
+	// 			edate: req.body.edate,
+	// 			ecol: ecol,
+	// 			erow: erow
 	// 		}
-	// 		else {
-	// 			console.log("in else");
+	// 	};
 
-	// 	 res1=result;
-	// 	 res2=res1[0]._id;
-	// 	 console.log("total",res1);
-	// 	 console.log("id is here",res2);
-
-	// 	 var ins={
-	// 		ename:req.body.ename,
-	// 		more_id:res2,
-
-	// 		etime:req.body.etime,
-	// 		edate:req.body.edate,
-	// 		eseats:req.body.eseats,
-	// 		eprice:req.body.eprice,
-	// 		userID:userID,
-	// 		ecol:ecol,
-	// 		erow:erow
-
-	// 	}
-
-	// 	dbo.collection("Inventory").insertOne(ins, function (err, res) {
+	// 	dbo.collection("inventory").updateOne(myquery, newvalues, function(
+	// 		err,
+	// 		res
+	// 	) {
 	// 		if (err) throw err;
-	// 		console.log("1 document inserted");
-
-	// });
-
-	// 		}
-	// 		res.redirect("/events?id=" + userID);
-	// 	})
-
-	// 	var ins={
-	// 		ename:req.body.ename,
-	// 		more_id:res2,
-	// 		etime:req.body.etime,
-	// 		edate:req.body.edate,
-	// 		eseats:req.body.eseats,
-	// 		eprice:req.body.eprice,
-	// 		userID:userID,
-	// 		ecol:ecol,
-	// 		erow:erow
-
-	// 	}
-
-	// 	dbo.collection("Inventory").insertOne(ins, function (err, res) {
-	// 		if (err) throw err;
-	// 		console.log("1 document inserted");
-
+	// 		console.log("1 document updated");
+	// 	});
 	// 	res.redirect("/events?id=" + userID);
 	// });
 
-	// dbo.collection("venue").find(myven).toArray(function (err, result) {
-	// 	if (err) {
-	// 		console.log(err);
-	// 	}
-	// 	else {
-	// 		for (i = 0; i < result.length; i++) {
-	// 			mov[i] = result[i];
-	// 		}
-	// 	}
-	// 	res.render('movie_landing', { mov: mov });
-	// })
-
 	app.post("/eventmodify/:userID", urlencodedParser, function(req, res) {
 		var userID = req.params.userID;
-
+		var resultArray = {
+			movies: [],
+			venue: []
+		};
 		var num = parseInt(req.body.eseats);
 		console.log(num);
 		var ecol = 10;
 		var erow = parseInt(num / 10);
-		console.log(ecol);
-		console.log(erow);
-		var my_id = {};
+		var myven = {
+			v_name: req.body.evenue
+		};
+		var myquery1 = {
+			mvname: req.body.ename
+		};
+
 		var myquery = { _id: ObjectID(req.body.uid) };
 		var idnew = req.body.uid;
 		console.log("idnew" + idnew);
-		var newvalues = {
-			$set: {
-				userID: userID,
-				ename: req.body.ename,
-				elang: req.body.elang,
-				etype: req.body.etype,
-				etime: req.body.etime,
-				evenue: req.body.evenue,
-				eseats: req.body.eseats,
-				ecity: req.body.ecity,
-				edate: req.body.edate,
-				ecol: ecol,
-				erow: erow
-			}
-		};
 
-		dbo.collection("inventory").updateOne(myquery, newvalues, function(
+		var cursor = dbo.collection("movies").find(myquery1);
+		cursor.forEach(function(doc, err) {
+			resultArray.movies.push(doc);
+			console.log("value here", resultArray.movies);
+			var venue = dbo.collection("venue").find(myven);
+			venue.forEach(
+				function(doc, err) {
+					resultArray.venue.push(doc);
+				},
+				function() {
+					console.log(resultArray);
+					var resmov = resultArray.movies;
+					var resven = resultArray.venue;
+					var a = {
+						$set: {
+							userID: userID,
+
+							more_id: resmov[0]._id,
+							ven_id: resven[0]._id,
+							ename: req.body.ename,
+							etime: req.body.etime,
+
+							evenue: req.body.evenue,
+							eseats: req.body.eseats,
+
+							eprice: req.body.eprice,
+							edate: req.body.edate,
+							ecol: ecol,
+							erow: erow
+						}
+					};
+					dbo.collection("Inventory").updateOne(myquery, a, function(
+						err,
+						res
+					) {
+						if (err) throw err;
+						console.log("1 document updated");
+					});
+
+					res.redirect("/events?id=" + userID);
+				}
+			);
+		});
+	});
+
+	app.post("/modify_eventnew/:userID", urlencodedParser, function(req, res) {
+		var userID = req.params.userID;
+		var evename = req.body.emodevent;
+		var evevenue = req.body.emodvenueevent;
+		console.log("\n\n\nname", evename);
+		console.log("\n\n\nvenue", evevenue);
+		var myquery = { ename: evename, evenue: evevenue };
+		var tasks = [
+			function(callback) {
+				dbo.collection("Inventory")
+					.find(myquery)
+					.toArray(function(err, result) {
+						if (err) return callback(err);
+						if (result.length != 0) {
+							result1 = result;
+							console.log(result1);
+							callback();
+							console.log("available");
+						} else {
+							result1 = [];
+							console.log("not available");
+							callback();
+						}
+					});
+			},
+
+			function(callback) {
+				dbo.collection("movies")
+					.find({ mvname: evename })
+					.toArray(function(err, result) {
+						if (err) return callback(err);
+						if (result.length != 0) {
+							movies = result;
+							console.log(result1);
+							callback();
+							console.log("available");
+						} else {
+							movies = [];
+							console.log("not available");
+							callback();
+						}
+					});
+			},
+
+			function(callback) {
+				dbo.collection("venue")
+					.find({})
+					.toArray(function(err, result) {
+						if (err) return callback(err);
+						if (result.length != 0) {
+							venue = result;
+							console.log(result1);
+							callback();
+							console.log("available");
+						} else {
+							venue = [];
+							console.log("not available");
+							callback();
+						}
+					});
+			}
+		];
+		async.parallel(tasks, function(err) {
+			if (err) return next(err);
+			console.log("Inside render");
+
+			res.render("modify_eventnew", {
+				movies: movies,
+				venue: venue,
+				userID: userID,
+				result: result1
+			});
+		});
+	});
+
+	app.post("/modeventsubmit/:userID", urlencodedParser, function(req, res) {
+		var userID = req.params.userID;
+		var iid=req.body.iid;
+		var uid=req.body.uid;
+		var eid=req.body.eid;
+		
+		var myquery = { _id: ObjectID(eid) };
+		var myquery1 = { _id: ObjectID(iid),
+						userID:uid};
+						console.log(ObjectID(iid));
+		var newevent={$set:{
+			mvname:req.body.ename,
+			mv_type:"events",
+			mv_lang:req.body.elang,
+			mv_desc:req.body.edesc,
+			mv_rating:req.body.erating,
+			mv_image:req.body.eimg
+		}};
+		
+		dbo.collection("movies").updateOne(myquery, newevent, function(
 			err,
 			res
 		) {
 			if (err) throw err;
 			console.log("1 document updated");
+			console.log(myquery);
 		});
-		res.redirect("/events?id=" + userID);
+
+		dbo.collection("venue").findOne({v_name:req.body.evenue}, function(err, result) {
+			if (err) throw err;
+			if(result.length!=0){
+				console.log("present in venue")
+				console.log(result._id);
+				var invent={$set:{
+					ename:req.body.ename,
+					ven_id:result._id,
+					evenue:req.body.evenue,
+					eseats:req.body.eseats,
+					edate:req.body.edate,
+					eprice:req.body.eprice,
+					etime:req.body.etime
+				}};
+				dbo.collection("Inventory").updateOne(myquery1,invent,function(err,res){
+					if(err)throw err;
+					console.log("1 doc updated");
+					console.log(myquery1);
+				})
+			}
+			else{
+				//do nothing
+			}
+			
+
+			
+		  });
+		  res.redirect("/events?id=" + userID);
 	});
 
 	app.post("/event_delete/:userID", urlencodedParser, function(req, res) {
@@ -602,7 +650,7 @@ MongoClient.connect(url, function(err, db) {
 
 		var userID = req.params.userID;
 
-		dbo.collection("inventory").remove(myquery, function(err, obj) {
+		dbo.collection("Inventory").remove(myquery, function(err, obj) {
 			if (err) throw err;
 			console.log(obj.result.n + " document(s) deleted");
 		});
@@ -612,30 +660,81 @@ MongoClient.connect(url, function(err, db) {
 
 	app.post("/event_modify/:userID", urlencodedParser, function(req, res) {
 		var userID = req.params.userID;
+		var count = 0,
+			count1 = 0;
+		var flag1 = 0,
+			flag2 = 0;
 		var myquery = {
 			ename: req.body.emod,
 			userID: req.params.userID,
 			evenue: req.body.emodvenue
 		};
+		var result1, movies, venue;
+		var tasks = [
+			function(callback) {
+				dbo.collection("Inventory")
+					.find(myquery)
+					.toArray(function(err, result) {
+						if (err) return callback(err);
+						if (result.length != 0) {
+							result1 = result;
+							console.log(result1);
+							callback();
+							console.log("available");
+						} else {
+							result1 = [];
+							console.log("not available");
+							callback();
+						}
+					});
+			},
+			function(callback) {
+				dbo.collection("movies")
+					.find({})
+					.toArray(function(err, result) {
+						if (err) return callback(err);
+						if (result.length != 0) {
+							movies = result;
+							console.log(result1);
+							callback();
+							console.log("available");
+						} else {
+							movies = [];
+							console.log("not available");
+							callback();
+						}
+					});
+			},
 
-		dbo.collection("inventory")
-			.find(myquery)
-			.toArray(function(err, result) {
-				if (err) throw err;
+			function(callback) {
+				dbo.collection("venue")
+					.find({})
+					.toArray(function(err, result) {
+						if (err) return callback(err);
+						if (result.length != 0) {
+							venue = result;
+							console.log(result1);
+							callback();
+							console.log("available");
+						} else {
+							venue = [];
+							console.log("not available");
+							callback();
+						}
+					});
+			}
+		];
+		async.parallel(tasks, function(err) {
+			if (err) return next(err);
+			console.log("Inside render");
 
-				if (result.length != 0) {
-					flag = 1;
-
-					console.log("available in profile");
-				} else {
-					flag = 0;
-					console.log("not available in profile");
-				}
-
-				var a = result;
-
-				res.render("event_modify", { result: a, userID: userID });
+			res.render("event_modify", {
+				movies: movies,
+				venue: venue,
+				userID: userID,
+				result: result1
 			});
+		});
 	});
 	var ven = [];
 	var movi = [];
